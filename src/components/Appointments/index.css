@@ -1,0 +1,50 @@
+/* Write your CSS here */
+
+.Main1 {
+  background-image: linear-gradient(to top, #9796f0, #fbc7d4);
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+.container1 {
+  background-color: cornsilk;
+  display: column;
+  padding: 15px;
+  width: 90vw;
+}
+.appshe {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-bottom: solid;
+}
+
+.Add {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.inp {
+  margin-bottom: 15px;
+}
+
+.secn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+.button1 {
+  background-color: violet;
+  height: fit-content;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+}
