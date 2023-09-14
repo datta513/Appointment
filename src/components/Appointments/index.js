@@ -5,7 +5,7 @@ import './index.css'
 import AppointmentItem from '../AppointmentItem'
 
 export default class Appointments extends Component {
-  state = {title: '', date: '', lis: [], favlis: [], issel: false}
+  state = {title: '', date: '', lis: [], issel: false}
 
   submit = event => {
     event.preventDefault()
@@ -17,6 +17,7 @@ export default class Appointments extends Component {
       date,
       isfav: false,
     }
+
     this.setState(prev => ({
       lis: [...prev.lis, currentele],
       title: '',
@@ -36,7 +37,7 @@ export default class Appointments extends Component {
   }
 
   only = () => {
-    this.setState(prev => ({lis: prev.lis.filter(each => each.isfav === true)}))
+    this.setState(prev => ({issel: !prev.issel}))
   }
 
   change = id => {
@@ -53,8 +54,14 @@ export default class Appointments extends Component {
   }
 
   render() {
-    const {lis, title, date} = this.state
-    console.log(lis)
+    const {lis, title, date, issel} = this.state
+    const favlis = () => {
+      const k = lis.filter(each => each.isfav === true)
+      return k
+    }
+    const resdict = issel ? favlis() : lis
+    console.log(favlis)
+    console.log('favlis')
     return (
       <div className="Main1">
         <div className="container1">
@@ -86,13 +93,17 @@ export default class Appointments extends Component {
               alt=" appointments"
             />
           </div>
-          <li className="secn">
+          <div className="secn">
             <h1>Appointments</h1>
             <button type="button" className="button1" onClick={this.only}>
               Starred
             </button>
-          </li>
-          <ul></ul>
+          </div>
+          <ul>
+            {resdict.map(each => (
+              <AppointmentItem item={each} key={each.id} onc={this.change} />
+            ))}
+          </ul>
         </div>
       </div>
     )
