@@ -5,7 +5,7 @@ import './index.css'
 import AppointmentItem from '../AppointmentItem'
 
 export default class Appointments extends Component {
-  state = {title: '', date: '', lis: []}
+  state = {title: '', date: '', lis: [], favlis: [], issel: false}
 
   submit = event => {
     event.preventDefault()
@@ -25,6 +25,7 @@ export default class Appointments extends Component {
   }
 
   changein = event => {
+    console.log(`present ${event.target.value}`)
     this.setState(prev => ({
       title: event.target.value,
     }))
@@ -32,6 +33,23 @@ export default class Appointments extends Component {
 
   datechange = event => {
     this.setState(prev => ({date: event.target.value}))
+  }
+
+  only = () => {
+    this.setState(prev => ({lis: prev.lis.filter(each => each.isfav === true)}))
+  }
+
+  change = id => {
+    console.log('entered')
+    console.log(id)
+    this.setState(prev => ({
+      lis: prev.lis.map(each => {
+        if (each.id === id) {
+          return {...each, isfav: !each.isfav}
+        }
+        return each
+      }),
+    }))
   }
 
   render() {
@@ -43,11 +61,11 @@ export default class Appointments extends Component {
           <div className="appshe">
             <form className="Add" onSubmit={this.submit}>
               <h1>Add Appointment</h1>
-              <label htmlFor="inp">TITLE</label>
+              <label htmlFor="inp">Title</label>
               <input
                 type="text"
                 id="inp"
-                className="inp"
+                className="inp1"
                 onChange={this.changein}
                 value={title}
               />
@@ -68,19 +86,13 @@ export default class Appointments extends Component {
               alt=" appointments"
             />
           </div>
-          <div>
-            <div className="secn">
-              <h1>Appointments</h1>
-              <button type="button" className="button1">
-                Starred
-              </button>
-            </div>
-            <ul className="item">
-              {lis.map(each => (
-                <AppointmentItem item={each} key={each.id} />
-              ))}
-            </ul>
-          </div>
+          <li className="secn">
+            <h1>Appointments</h1>
+            <button type="button" className="button1" onClick={this.only}>
+              Starred
+            </button>
+          </li>
+          <ul></ul>
         </div>
       </div>
     )
